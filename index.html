@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tapify - Your Financial Breakthrough</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+
+    <style>
+        /* CSS RESET & BASE STYLES */
+        :root {
+            --primary-orange: #F9690E;
+            --dark-bg: #050608; 
+            --dark-card: #161B22;
+            --text-light: #f0f6fc;
+            --text-medium: #c9d1d9;
+            --border-color: #30363d;
+            --glow-color: rgba(249, 105, 14, 0.4);
+            --glow-color-strong: rgba(249, 105, 14, 0.2);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Inter', sans-serif; background-color: var(--dark-bg); color: var(--text-light); line-height: 1.6; overflow-x: hidden; position: relative; }
+        
+        /* HEADER & NAVIGATION */
+        .header { position: fixed; top: 0; left: 0; width: 100%; padding: 20px 0; z-index: 1000; transition: background-color 0.3s ease; }
+        .header.scrolled { background-color: rgba(5, 6, 8, 0.8); backdrop-filter: blur(10px); box-shadow: 0 2px 10px rgba(0,0,0,0.3); }
+        .navbar { display: flex; justify-content: space-between; align-items: center; }
+        .logo { display: flex; align-items: center; text-decoration: none; position: relative; }
+        .logo::before { content: ''; position: absolute; left: -10px; top: -10px; width: calc(100% + 20px); height: calc(100% + 20px); background: radial-gradient(circle, rgba(255, 255, 255, 0.1), rgba(249, 105, 14, 0.15), transparent 70%); filter: blur(15px); z-index: -1; border-radius: 50%; animation: pulse-glow 5s infinite alternate; }
+        @keyframes pulse-glow { from { transform: scale(0.9); opacity: 0.7; } to { transform: scale(1.1); opacity: 1; } }
+        @keyframes spin-infinite { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        .logo-img { height: 35px; margin-right: 8px; animation: spin-infinite 20s linear infinite; }
+        .logo-text { color: var(--text-light); font-size: 1.6rem; font-weight: 700; font-family: 'Poppins', sans-serif; }
+        .nav-links { list-style: none; display: flex; align-items: center; }
+        .nav-links li { margin-left: 30px; }
+        .nav-links a { color: var(--text-medium); text-decoration: none; font-weight: 500; transition: color 0.3s ease; }
+        .nav-links a:hover { color: var(--primary-orange); }
+        .nav-cta { margin-left: 20px; }
+        .mobile-controls { display: none; }
+
+        /* HERO SECTION */
+        .hero { min-height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center; position: relative; overflow: hidden; padding: 120px 0; }
+        .hero-glow-container { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; overflow: hidden; }
+        .glow-ball { position: absolute; border-radius: 50%; filter: blur(120px); opacity: 0.15; }
+        .glow-ball-1 { width: 400px; height: 400px; background: var(--primary-orange); top: 10%; left: 5%; animation: float 25s infinite alternate ease-in-out; }
+        .glow-ball-2 { width: 300px; height: 300px; background: #4c00ff; bottom: 5%; right: 10%; animation: float 30s infinite alternate ease-in-out; animation-delay: -15s; }
+        .glow-ball-3 { width: 250px; height: 250px; background: var(--primary-orange); top: 30%; right: 20%; animation: float 20s infinite alternate ease-in-out; animation-delay: -5s; }
+        @keyframes float { 0% { transform: translateY(20px) translateX(0px) scale(1); } 100% { transform: translateY(-20px) translateX(20px) scale(1.1); } }
+        .hero-content { position: relative; z-index: 1; max-width: 650px; margin: 0 auto; }
+        .hero-content h1 { font-size: 3.2rem; font-weight: 800; line-height: 1.15; }
+        .hero-content .subtitle { font-size: 1.2rem; color: var(--text-medium); max-width: 600px; margin: 25px auto 40px; }
+        .hero-buttons { display: flex; justify-content: center; align-items: center; gap: 20px; flex-wrap: wrap; }
+        .gradient-text { background: linear-gradient(90deg, var(--primary-orange), #ffeb3b); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        
+        /* GENERIC STYLES */
+        .container { width: 90%; max-width: 1200px; margin: 0 auto; }
+        section { padding: 100px 0; }
+        .section-title { text-align: center; margin-bottom: 50px; }
+        .section-title h2 { display: inline-block; position: relative; padding-bottom: 10px; font-size: 2.2rem; font-weight: 700;}
+        .section-title h2::after { content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 60px; height: 4px; background: var(--primary-orange); border-radius: 2px; }
+        .cta-button { display: inline-block; padding: 12px 28px; background: linear-gradient(90deg, var(--primary-orange), #ff8c42); color: white; text-decoration: none; font-weight: 600; font-family: 'Poppins', sans-serif; border-radius: 50px; transition: all 0.3s ease; box-shadow: 0 5px 20px var(--glow-color); border: none; cursor: pointer; }
+        .cta-button:hover { transform: translateY(-3px); box-shadow: 0 8px 25px var(--glow-color); }
+        .cta-button-outline { display: inline-block; padding: 12px 30px; background: transparent; color: var(--text-light); border: 2px solid var(--border-color); text-decoration: none; font-weight: 600; font-family: 'Poppins', sans-serif; border-radius: 50px; transition: all 0.3s ease; }
+        .cta-button-outline:hover { background-color: var(--primary-orange); color: white; border-color: var(--primary-orange); }
+        
+        /* FEATURES SECTION */
+        .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
+        .feature-card { background-color: var(--dark-card); padding: 30px; border-radius: 15px; text-align: center; border: 1px solid var(--border-color); transition: all 0.3s ease; }
+        .feature-card:hover { transform: translateY(-10px); border-color: var(--primary-orange); box-shadow: 0 10px 30px var(--glow-color); }
+        .feature-icon { font-size: 3rem; color: var(--primary-orange); margin-bottom: 20px; }
+        .feature-card h3 { margin-bottom: 10px; color: var(--text-light); }
+        .feature-card p { color: var(--text-medium); }
+        
+        /* REWARDS SECTION */
+        .rewards-section { background-color: var(--dark-card); border-radius: 20px; padding: 50px; border: 1px solid var(--border-color); }
+        .rewards-main-image { display: block; width: 100%; max-width: 800px; margin: 0 auto 50px auto; border-radius: 15px; }
+        .rewards-intro-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; text-align: center; }
+        .reward-intro-item { background-color: var(--dark-bg); padding: 20px; border-radius: 10px; border: 1px solid var(--border-color); }
+        .reward-intro-item h3 { color: var(--primary-orange); font-size: 2rem; margin-bottom: 5px; }
+        .reward-intro-item p { color: var(--text-medium); font-weight: 600; }
+        
+        /* NEW UNLIMITED EARNINGS SECTION */
+        #unlimited-earnings { padding-top: 0; position: relative; }
+        #unlimited-earnings::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 80%;
+            height: 80%;
+            transform: translate(-50%, -50%);
+            background: radial-gradient(ellipse, var(--glow-color-strong), transparent 70%);
+            filter: blur(100px);
+            z-index: -1;
+        }
+
+        .earnings-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+        .earning-item { display: flex; align-items: center; background-color: var(--dark-bg); padding: 15px 20px; border-radius: 10px; border: 1px solid var(--border-color); transition: all 0.3s ease; }
+        .earning-item:hover { border-color: var(--primary-orange); transform: translateY(-5px); box-shadow: 0 5px 20px rgba(249, 105, 14, 0.2); }
+        .earning-icon { font-size: 1.8rem; margin-right: 15px; color: var(--primary-orange); width: 40px; text-align: center; }
+        .earning-text span { display: block; font-weight: 600; }
+        .earning-text small { color: var(--text-medium); }
+
+        /* OTHER SECTIONS */
+        .payout-section { background: linear-gradient(rgba(5, 6, 8, 0.95), rgba(5, 6, 8, 0.95)), url('assets/payout-schedule-person.jpg'); background-size: cover; background-position: center; background-attachment: fixed; }
+        .payout-content { display: grid; grid-template-columns: 1fr; gap: 40px; align-items: center; }
+        .payout-text h2 { text-align: left; margin-bottom: 20px; }
+        .payout-text p { color: var(--text-medium); margin-bottom: 30px; max-width: 500px; }
+        .payout-schedule { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+        .payout-card { background-color: var(--dark-card); padding: 25px; border-radius: 10px; border-left: 4px solid var(--primary-orange); transition: all 0.3s ease; }
+        .payout-card:hover { transform: scale(1.02); box-shadow: 0 0 20px var(--glow-color); }
+        .payout-card h3 { font-size: 1.2rem; color: var(--text-light); margin-bottom: 10px; }
+        .payout-card p { color: var(--text-medium); font-weight: 500; margin-bottom: 0; }
+        .dual-section { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: center; }
+        .dual-section.reverse { grid-template-columns: 1fr 1fr; }
+        .dual-section.reverse .dual-image { order: 2; }
+        .dual-section.reverse .dual-text { order: 1; }
+        .dual-text h2 { margin-bottom: 20px; background: linear-gradient(90deg, var(--primary-orange), #ffeb3b); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .dual-text p { color: var(--text-medium); margin-bottom: 30px; }
+        .dual-image img { width: 100%; height: auto; border-radius: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.5); }
+        #government .dual-image { background-color: var(--dark-card); padding: 30px; border-radius: 20px; border: 1px solid var(--border-color); }
+        .footer { background-color: var(--dark-card); padding: 50px 0; text-align: center; border-top: 1px solid var(--border-color); }
+        .footer-logo { display: flex; align-items: center; justify-content: center; margin-bottom: 20px; }
+        .footer p { color: var(--text-medium); }
+        .hidden { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
+        .visible { opacity: 1; transform: translateY(0); }
+
+        /* HERO ANIMATION */
+        .hero-animation-container {
+            position: relative;
+            width: 150px;
+            height: 150px;
+            margin: 0 auto 30px;
+            -webkit-tap-highlight-color: transparent;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: width 1s cubic-bezier(0.42, 0, 0.58, 1);
+        }
+        .hero-animation-container::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: var(--primary-orange);
+            border-radius: 50%;
+            filter: blur(50px);
+            z-index: -1;
+            opacity: 0;
+            transform: scale(0.8);
+            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+        }
+        .hero-animation-container.glowing::before {
+            opacity: 0.7;
+            transform: scale(1.1);
+        }
+        .hero-logo-animated {
+            width: 150px;
+            height: 150px;
+            transition: transform 1s cubic-bezier(0.42, 0, 0.58, 1);
+            object-fit: contain;
+            flex-shrink: 0;
+        }
+        .animated-logo-text {
+            font-family: 'Poppins', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--text-light);
+            opacity: 0;
+            transform: translateX(-20px);
+            width: 0;
+            overflow: hidden;
+            white-space: nowrap;
+            transition: all 1s cubic-bezier(0.42, 0, 0.58, 1);
+            margin-left: 0;
+            flex-shrink: 0;
+        }
+        .hero-animation-container.text-revealed {
+             width: 290px;
+        }
+        .hero-animation-container.text-revealed .animated-logo-text {
+            opacity: 1;
+            width: 130px;
+            transform: translateX(0);
+            margin-left: 10px;
+        }
+        .hand-icon {
+            position: absolute;
+            bottom: 5px;
+            right: 5px;
+            font-size: 2.5rem;
+            transform-origin: bottom right;
+            pointer-events: none;
+            opacity: 0;
+        }
+        .hand-icon.active {
+            animation: single-tap 2s ease-in-out forwards;
+        }
+        @keyframes single-tap {
+            0% { transform: scale(1) translate(0, 0); opacity: 0; }
+            25% { transform: scale(1) translate(0, 0); opacity: 1; }
+            50% { transform: scale(0.9) translate(-10px, -10px); }
+            60% { transform: scale(1.1) translate(0px, 0px); }
+            100% { transform: scale(1) translate(0, 0); opacity: 0; }
+        }
+        .hero-logo-animated.spinning {
+            animation: spin-fast 4s cubic-bezier(0.42, 0, 0.58, 1);
+        }
+        @keyframes spin-fast {
+            0% { transform: rotate(0deg) scale(1); }
+            100% { transform: rotate(1440deg) scale(1); }
+        }
+        .coin-spill-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: visible;
+        }
+        .coin {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 25px;
+            height: 25px;
+            background: linear-gradient(135deg, #ffd700, #f9a825);
+            border-radius: 50%;
+            border: 2px solid #fff;
+            color: #a16207;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Poppins', sans-serif;
+            font-size: 14px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.4), inset 0 2px 2px rgba(255,255,255,0.5);
+            opacity: 0;
+            animation: spill 4s cubic-bezier(0.3, 0.2, 0, 1.0) forwards;
+        }
+        @keyframes spill {
+            0% {
+                transform: translate(-50%, -50%) scale(0.5);
+                opacity: 0;
+            }
+            15% {
+                transform: var(--transform-pop);
+                opacity: 1;
+            }
+            100% {
+                transform: var(--transform-end);
+                opacity: 0;
+            }
+        }
+
+        /* RESPONSIVE DESIGN */
+        @media (max-width: 992px) {
+            h1 { font-size: 2.5rem; } h2 { font-size: 1.8rem; }
+            .dual-section, .dual-section.reverse { grid-template-columns: 1fr; }
+            .dual-section.reverse .dual-image, .dual-section.reverse .dual-text { order: initial; }
+            .dual-text { text-align: center; } .dual-image { margin-top: 30px; }
+        }
+        @media (max-width: 768px) {
+            section { padding: 80px 0; }
+            .nav-links { position: fixed; top: 0; right: -100%; width: 70%; height: 100vh; background-color: var(--dark-card); flex-direction: column; justify-content: center; align-items: center; display: flex; transition: right 0.4s ease-in-out; box-shadow: -5px 0 15px rgba(0,0,0,0.5); }
+            .nav-links.active { right: 0; } .nav-links li { margin: 20px 0; } .nav-links a { font-size: 1.2rem; }
+            .nav-links { display: none; } .nav-links.active { display: flex; }
+            .mobile-controls { display: flex; align-items: center; gap: 15px; }
+            .logo-img { height: 24px; } .logo-text { font-size: 1.2rem; }
+            .mobile-controls .cta-button { padding: 8px 16px; font-size: 0.8rem; }
+            .hamburger { display: flex; cursor: pointer; flex-direction: column; gap: 4px; z-index: 1001; }
+            .hamburger .bar { width: 22px; height: 2px; background-color: var(--text-light); border-radius: 5px; transition: all 0.3s ease; }
+            .hamburger.toggle .bar:nth-child(1) { transform: rotate(-45deg) translate(-5px, 6px); }
+            .hamburger.toggle .bar:nth-child(2) { opacity: 0; }
+            .hamburger.toggle .bar:nth-child(3) { transform: rotate(45deg) translate(-5px, -6px); }
+            .hero { min-height: auto; padding-top: 120px; padding-bottom: 80px; }
+            .hero-content h1 { font-size: 2.1rem; white-space: normal; }
+            .hero-content .subtitle { font-size: 0.9rem; }
+            .hero-buttons .cta-button, .hero-buttons .cta-button-outline { padding: 10px 22px; font-size: 0.9rem; }
+            .reward-intro-item h3 { font-size: 1.8rem; }
+            .rewards-section { padding: 30px 20px; }
+            .rewards-main-image { margin-bottom: 30px; }
+            .hero-logo-animated {
+                width: 100px;
+                height: 100px;
+            }
+            .hero-animation-container { width: 100px; height: 100px; }
+            .animated-logo-text { font-size: 1.8rem; }
+            .hero-animation-container.text-revealed { width: 200px; }
+            .hero-animation-container.text-revealed .animated-logo-text { width: 90px; margin-left: 5px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <nav class="navbar container">
+            <a href="#" class="logo"><img src="assets/logo.png" alt="Tapify Logo" class="logo-img"><span class="logo-text">Tapify</span></a>
+            <ul class="nav-links">
+                <li><a href="#features">Features</a></li>
+                <li><a href="#rewards">Rewards</a></li>
+                <li><a href="#unlimited-earnings">Earnings</a></li>
+                <li><a href="#payout">Payouts</a></li>
+                <li><a href="#about">About</a></li>
+                <li class="nav-cta"><a href="https://wa.me/2349152689751?text=Hello%2C%20I%20am%20ready%20to%20register%20and%20purchase%20a%20coupon%20code%20for%20Tapify" class="cta-button" target="_blank" rel="noopener noreferrer">Get Started</a></li>
+            </ul>
+            <div class="mobile-controls">
+                <a href="https://wa.me/2349152689751?text=Hello%2C%20I%20am%20ready%20to%20register%20and%20purchase%20a%20coupon%20code%20for%20Tapify" class="cta-button" target="_blank" rel="noopener noreferrer">Get Started</a>
+                <div class="hamburger"><span class="bar"></span><span class="bar"></span><span class="bar"></span></div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="hero-glow-container"><div class="glow-ball glow-ball-1"></div><div class="glow-ball glow-ball-2"></div><div class="glow-ball glow-ball-3"></div></div>
+            <div class="hero-content">
+                <div class="hero-animation-container">
+                    <img src="assets/logo.png" alt="Tapify Logo Animation" class="hero-logo-animated">
+                    <span class="animated-logo-text">Tapify</span>
+                    <div class="hand-icon" aria-hidden="true">👆</div>
+                    <div class="coin-spill-container"></div>
+                </div>
+                <h1>Tap Into Your <span class="gradient-text">Financial Breakthrough.</span></h1>
+                <p class="subtitle">Join a global movement where anyone, from anywhere, can earn, grow, and succeed. Your journey to endless income opportunities starts now.</p>
+                <div class="hero-buttons">
+                    <a href="https://wa.me/2349152689751?text=Hello%2C%20I%20am%20ready%20to%20register%20and%20purchase%20a%20coupon%20code%20for%20Tapify" class="cta-button" target="_blank" rel="noopener noreferrer">Join Us Today</a>
+                    <a href="#features" class="cta-button-outline">Learn More</a>
+                </div>
+            </div>
+        </section>
+        
+        <section id="features" class="container">
+            <div class="section-title"><h2>Why Choose Tapify?</h2></div>
+            <div class="features-grid">
+                <div class="feature-card hidden"><div class="feature-icon">📲</div><h3>Scroll & Earn</h3><p>Get rewarded for simply scrolling through content you love.</p></div>
+                <div class="feature-card hidden"><div class="feature-icon">💃</div><h3>Share TikToks</h3><p>Share trending videos and earn instantly for your engagement.</p></div>
+                <div class="feature-card hidden"><div class="feature-icon">🎨</div><h3>Upload & Create</h3><p>Creators earn more by uploading content and growing their audience.</p></div>
+            </div>
+        </section>
+
+        <section id="rewards" class="container">
+            <div class="rewards-section hidden">
+                <div class="section-title"><h2>The Rewards in Detail</h2></div>
+                <img src="assets/hero-background.jpg" alt="Tapify Rewards Architecture Chart" class="rewards-main-image">
+                <div class="rewards-intro-grid">
+                    <div class="reward-intro-item"><h3>₦10,000</h3><p>Enrollment Fee</p></div>
+                    <div class="reward-intro-item"><h3>₦9,000</h3><p>Revenue Share</p></div>
+                    <div class="reward-intro-item"><h3>₦8,000</h3><p>Newbie Bonus</p></div>
+                    <div class="reward-intro-item"><h3>5GB</h3><p>Welcome Data</p></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- NEW DEDICATED SECTION -->
+        <section id="unlimited-earnings" class="container">
+            <div class="section-title"><h2>Unlimited Earning Opportunities</h2></div>
+            <div class="earnings-grid hidden">
+                <div class="earning-item"><div class="earning-icon">🔥</div><div class="earning-text"><span>Snap/TikTok Streak</span><small>$10 per streak</small></div></div>
+                <div class="earning-item"><div class="earning-icon">🏍️</div><div class="earning-text"><span>Rider Earnings</span><small>$20 per delivery</small></div></div>
+                <div class="earning-item"><div class="earning-icon">🚶</div><div class="earning-text"><span>Step Earning</span><small>$10 per 100 steps</small></div></div>
+                <div class="earning-item"><div class="earning-icon">🎙️</div><div class="earning-text"><span>Recording Earning</span><small>$0.2 each</small></div></div>
+                <div class="earning-item"><div class="earning-icon">🔗</div><div class="earning-text"><span>Engaged Social Link</span><small>$5 daily</small></div></div>
+                <div class="earning-item"><div class="earning-icon">📝</div><div class="earning-text"><span>Approved Topics</span><small>$5 per topic</small></div></div>
+                <div class="earning-item"><div class="earning-icon">✍️</div><div class="earning-text"><span>Forum Engagement</span><small>N200 per 10 words</small></div></div>
+                <div class="earning-item"><div class="earning-icon">🤝</div><div class="earning-text"><span>Referral Bonus</span><small>N250 (1st), N100 (2nd)</small></div></div>
+            </div>
+        </section>
+
+        <section id="payout" class="payout-section">
+            <div class="container payout-content">
+                <div class="payout-text hidden"><h2>Reliable Payout Schedule</h2><p>We don't delay payments. We look forward to rewarding you! Choose your preferred payout date and cash out with ease.</p></div>
+                <div class="payout-schedule hidden">
+                    <div class="payout-card"><h3>Thrice-Weekly Withdrawals</h3><p>Mon, Wed & Fri (4PM - 6PM)</p><p>For Tap Coins, daily tasks, games, etc.</p></div>
+                    <div class="payout-card"><h3>Monthly Withdrawals</h3><p>Every Last Day of The Month</p><p>For Newbie bonus & activity earnings.</p></div>
+                    <div class="payout-card"><h3>Minimum Withdrawal</h3><p>₦15,000 (Tap Dividends)</p><p>$85 (Salary)</p></div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="about" class="container">
+            <div class="dual-section hidden">
+                <div class="dual-text"><h2>Tapify Works Worldwide</h2><p>No matter your location, Tapify unlocks endless income opportunities and helps you take control of your financial journey. Borders don’t define success here—your dedication does.</p><a href="https://wa.me/2349152689751?text=Hello%2C%20I%20am%20ready%20to%20register%20and%20purchase%20a%20coupon%20code%20for%20Tapify" class="cta-button" target="_blank" rel="noopener noreferrer">Get Started Now</a></div>
+                <div class="dual-image"><img src="assets/tapify-works-worldwide.jpg" alt="Woman sitting on top of a globe using her phone"></div>
+            </div>
+            <div id="government" class="dual-section reverse hidden" style="margin-top: 100px;">
+                <div class="dual-image"><img src="assets/government-certificate.jpg" alt="Government Certificate of Registration"></div>
+                <div class="dual-text"><h2>Stamped, Sealed, & Supported</h2><p>From groundbreaking ideas to game-changing solutions, everything we've built to empower you has been thoroughly reviewed, verified, and officially certified by the CAC.</p><a href="https://wa.me/2349152689751?text=Hello%2C%20I%20am%20ready%20to%20register%20and%20purchase%20a%20coupon%20code%20for%20Tapify" class="cta-button" target="_blank" rel="noopener noreferrer">Join with Confidence</a></div>
+            </div>
+        </section>
+    </main>
+    
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-logo"><img src="assets/logo.png" alt="Tapify Logo" class="logo-img"><span class="logo-text">Tapify</span></div>
+            <p>&copy; 2025 Tapify Global. All rights reserved. Tap into your financial breakthrough.</p>
+        </div>
+    </footer>
+
+    <script>
+        const hamburger = document.querySelector('.hamburger');
+        const navLinks = document.querySelector('.nav-links');
+        const header = document.querySelector('.header');
+        hamburger.addEventListener('click', () => { hamburger.classList.toggle('toggle'); navLinks.classList.toggle('active'); });
+        document.querySelectorAll('.nav-links a').forEach(link => { if (!link.closest('.nav-cta')) { link.addEventListener('click', () => { hamburger.classList.remove('toggle'); navLinks.classList.remove('active'); }); } });
+        window.addEventListener('scroll', () => { header.classList.toggle('scrolled', window.scrollY > 50); });
+        const observer = new IntersectionObserver((entries) => { entries.forEach((entry) => { if (entry.isIntersecting) { entry.target.classList.add('visible'); observer.unobserve(entry.target); } }); }, { threshold: 0.1 });
+        const hiddenElements = document.querySelectorAll('.hidden');
+        hiddenElements.forEach((el) => observer.observe(el));
+
+        // Hero Animation Logic
+        const animationContainer = document.querySelector('.hero-animation-container');
+        const animatedLogo = document.querySelector('.hero-logo-animated');
+        const coinContainer = document.querySelector('.coin-spill-container');
+        const handIcon = document.querySelector('.hand-icon');
+
+        let isAnimating = false;
+
+        function triggerAnimation() {
+            if (isAnimating) return;
+            isAnimating = true;
+
+            // Phase 1: Hand appears and taps. The animation is 2s.
+            handIcon.classList.add('active');
+
+            // Phase 2: At the moment of the "tap" (1s in), start the logo spin, glow & coins
+            setTimeout(() => {
+                animatedLogo.classList.add('spinning');
+                animationContainer.classList.add('glowing');
+                
+                const coinCount = 30;
+                for (let i = 0; i < coinCount; i++) {
+                    const coin = document.createElement('div');
+                    coin.className = 'coin';
+                    coin.textContent = '$';
+                    
+                    const angle = (Math.random() - 0.5) * Math.PI; // Eject in a 180-degree upward arc
+                    const popVelocity = Math.random() * 60 + 50;
+                    
+                    const popX = Math.sin(angle) * popVelocity;
+                    const popY = -Math.cos(angle) * popVelocity;
+                    
+                    const endX = popX * 4 + (Math.random() - 0.5) * 80;
+                    const endY = 400;
+                    
+                    const rotation = (Math.random() - 0.5) * 720;
+
+                    coin.style.setProperty('--transform-pop', `translate(calc(-50% + ${popX}px), calc(-50% + ${popY}px)) rotate(${rotation / 3}deg) scale(1.1)`);
+                    coin.style.setProperty('--transform-end', `translate(calc(-50% + ${endX}px), ${endY}px) rotate(${rotation}deg) scale(0.9)`);
+                    
+                    coin.style.animationDelay = `${Math.random() * 0.25}s`;
+                    coin.style.animationDuration = `${Math.random() * 0.5 + 3.5}s`;
+                    
+                    coinContainer.appendChild(coin);
+                    
+                    setTimeout(() => { coin.remove(); }, 5000);
+                }
+            }, 1000);
+
+            // Phase 3: After spin (4s), reveal text.
+            setTimeout(() => {
+                animatedLogo.classList.remove('spinning');
+                animationContainer.classList.add('text-revealed');
+            }, 5000); // 1000ms delay + 4000ms spin
+
+            // Phase 4: After a delay, hide text.
+            setTimeout(() => {
+                animationContainer.classList.remove('text-revealed');
+            }, 7500); // Hold revealed state for 1.5s after 1s transition
+
+            // Phase 5: Reset everything after all animations are complete.
+            setTimeout(() => {
+                handIcon.classList.remove('active');
+                animationContainer.classList.remove('glowing');
+                isAnimating = false;
+            }, 9000); // Long enough for all animations to finish
+
+        }
+
+        // Start the animation loop after an initial delay for page elements to load
+        setTimeout(() => {
+            triggerAnimation(); // Initial run
+            setInterval(triggerAnimation, 9500); // Subsequent runs
+        }, 1500);
+    </script>
+</body>
+</html>
