@@ -124,6 +124,16 @@
         .dual-text p { color: var(--text-medium); margin-bottom: 30px; }
         .dual-image img { width: 100%; height: auto; border-radius: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.5); }
         #government .dual-image { background-color: var(--dark-card); padding: 30px; border-radius: 20px; border: 1px solid var(--border-color); }
+        
+        /* --- NEW COMMUNITY CTA SECTION --- */
+        .community-cta-box { background-color: var(--dark-card); padding: 60px 40px; border-radius: 20px; text-align: center; border: 1px solid var(--border-color); box-shadow: 0 0 40px var(--glow-color-strong); position: relative; overflow: hidden; }
+        .community-cta-box::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle at center, var(--glow-color) 0%, transparent 30%); animation: rotate-glow 10s linear infinite; z-index: 0; }
+        @keyframes rotate-glow { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        .community-cta-box > * { position: relative; z-index: 1; }
+        .community-icon { font-size: 3.5rem; margin-bottom: 20px; display: inline-block; color: var(--primary-orange); text-shadow: 0 0 15px var(--glow-color); }
+        .community-cta-box h2 { font-size: 2rem; font-weight: 700; margin-bottom: 15px; color: var(--text-light); }
+        .community-cta-box p { color: var(--text-medium); max-width: 600px; margin: 0 auto 30px auto; }
+
         .footer { background-color: var(--dark-card); padding: 50px 0; text-align: center; border-top: 1px solid var(--border-color); }
         .footer-logo { display: flex; align-items: center; justify-content: center; margin-bottom: 20px; }
         .footer p { color: var(--text-medium); }
@@ -294,6 +304,8 @@
             .animated-logo-text { font-size: 1.8rem; }
             .hero-animation-container.text-revealed { width: 200px; }
             .hero-animation-container.text-revealed .animated-logo-text { width: 90px; margin-left: 5px; }
+            .community-cta-box { padding: 40px 25px; }
+            .community-cta-box h2 { font-size: 1.6rem; }
         }
     </style>
 </head>
@@ -394,6 +406,17 @@
                 <div class="dual-text"><h2>Stamped, Sealed, & Supported</h2><p>From groundbreaking ideas to game-changing solutions, everything we've built to empower you has been thoroughly reviewed, verified, and officially certified by the CAC.</p><a href="https://wa.me/2347046900923?text=Hello%2C%20I%20am%20ready%20to%20register%20and%20start%20my%20earning%20my%20earning-journey%20on%20Tapify" class="cta-button" target="_blank" rel="noopener noreferrer">Join with Confidence</a></div>
             </div>
         </section>
+
+        <!-- NEW COMMUNITY SECTION -->
+        <section id="community" class="container">
+            <div class="community-cta-box hidden">
+                <div class="community-icon">🚀</div>
+                <h2>Ready to Kickstart Your Journey?</h2>
+                <p>Become part of the Tapify family! Get exclusive tips, support from fellow earners, and instant updates. Our WhatsApp community is the best place to learn, grow, and start earning today.</p>
+                <a href="https://chat.whatsapp.com/FaV35SN2BhDFt6rFMaiW7y?mode=ems_copy_t" class="cta-button" target="_blank" rel="noopener noreferrer">Join the Community</a>
+            </div>
+        </section>
+
     </main>
     
     <footer class="footer">
